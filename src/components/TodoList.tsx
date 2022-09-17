@@ -7,14 +7,13 @@ import {uuid} from '../util'
 function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
-
   useEffect(() => {
     localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
   }, [todosState])
 
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
-
+  const [appInfo, setAppInfo] = useState('');
   const onClick = () => {
     const color = {
       red: Math.floor(Math.random() * 100 + 150),
@@ -64,27 +63,6 @@ function TodoList() {
     })
   }
 
-  const downloadJson = () => {
-      const saveTemplateAsFile = (filename:string, dataObjToWrite:any) => {
-        const blob = new Blob([JSON.stringify(dataObjToWrite)], {type: 'text/json'})
-        const link = document.createElement('a')
-
-        link.download = filename
-        link.href = window.URL.createObjectURL(blob)
-        link.dataset.downloadurl = ['text/json', link.download, link.href].join(':')
-
-        const evt = new MouseEvent('click', {
-          view: window,
-          bubbles: true,
-          cancelable: true,
-        })
-
-        link.dispatchEvent(evt)
-        link.remove()
-      }
-    saveTemplateAsFile('todos.json', todosState.todos)
-  }
-
   return (
     <div>
       <div>
@@ -109,9 +87,17 @@ function TodoList() {
           <button
             onClick={onClick}
             disabled={!(itemTitle.length > 0 && itemText.length > 0)}
-          >Add Task</button> &nbsp;
+          >Add Task</button>
         </div>
       </div>
+      <button
+            onClick={async()=> {
+              const data = await fetch('/api/info');
+              const json = await data.json();
+              setAppInfo(json);
+            }}
+          >Get App Info</button>
+      <div>{JSON.stringify(appInfo)}</div>
       <div>
         {todosState.todos?.map((item: TodoType, index) =>
           <div
