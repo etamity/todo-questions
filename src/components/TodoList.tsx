@@ -89,7 +89,7 @@ function TodoList() {
     <div>
       <div>
         <div className={'todoInput'}>
-          <h4>TITLE</h4>
+          <h4>TITLE:</h4>
           <input
             type={'text'}
             onChange={e => setItemTitle(e.currentTarget.value)}
@@ -98,7 +98,7 @@ function TodoList() {
           />
         </div>
         <div className={'todoInput'}>
-          <h4>TASK</h4>
+          <h4>TASK:</h4>
           <textarea
             onChange={e => setItemText(e.currentTarget.value)}
             value={itemText}
