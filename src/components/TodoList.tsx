@@ -72,7 +72,7 @@ function TodoList() {
             type={'text'}
             onChange={e => setItemTitle(e.currentTarget.value)}
             value={itemTitle}
-            style={{width:'20rem'}}
+            style={{width:'20rem', border: '1px solid black'}}
           />
         </div>
         <div className={'todoInput'}>
