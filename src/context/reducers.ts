@@ -59,8 +59,8 @@ export const todoReducer = (
 ) => {
   switch (action.type) {
     case Types.Create:
-      // Your implementation
-      return []
+      // fetch('..//.')
+      return [...state, { ... action.payload}];
     case Types.Update:
       const s = [...state]
       const index = s.findIndex(item => item.id === action.payload.id)
@@ -90,8 +90,18 @@ export const todoReducer = (
         }
       })]
     case Types.Delete:
+      const id = action.payload.id;
+
+      const arr = [1, 2, 3];
+      const result = arr.reduce((a, b) => {
+        return a + b;
+      }, 'str');
+
+      const tmpList = state.filter(item => {
+        return item.id !== id;
+      });
       // Your implementation
-      return []
+      return tmpList;
     case Types.Relist:
       return [...action.payload]
     default:

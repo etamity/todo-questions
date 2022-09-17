@@ -7,12 +7,23 @@ import {uuid} from '../util'
 function TodoList() {
 
   const {todosState, todosDispatch} = useContext(TodoContext)
+
   useEffect(() => {
     localStorage.setItem('todoApp', JSON.stringify(todosState.todos))
   }, [todosState])
 
+  const [isFilled, setIsFilled] = useState(false);
+
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
+
+  useEffect(() => {
+    setIsFilled(!!(itemTitle && itemText)); // Boolean(), String, Number
+    return () => {
+      unmount()
+    }
+  }, [itemTitle, itemText]);
+
   const onClick = () => {
     const color = {
       red: Math.floor(Math.random() * 100 + 150),
@@ -33,6 +44,15 @@ function TodoList() {
     setItemTitle('')
     setItemText('')
   }
+
+  const onGetAppInfo = async () => {
+    const rawData = await fetch('/api/info');
+    const res = await rawData.json();
+    console.log(res);
+    // fetch('/api/info').then(res => res.json()).then(data => {
+    //   console.log(data);
+    // });
+  };
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData('text', e.currentTarget.id)
@@ -71,7 +91,7 @@ function TodoList() {
             type={'text'}
             onChange={e => setItemTitle(e.currentTarget.value)}
             value={itemTitle}
-            style={{width:'20rem'}}
+            style={{width:'20rem', border: '1px solid black'}}
           />
         </div>
         <div className={'todoInput'}>
@@ -84,8 +104,14 @@ function TodoList() {
         </div>
         <div>
           <button
+            disabled={!isFilled}
             onClick={onClick}
           >Add Task</button>
+        </div>
+        <div>
+          <button
+            onClick={onGetAppInfo}
+          >Get App Info</button>
         </div>
       </div>
       <div>
