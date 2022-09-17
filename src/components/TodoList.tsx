@@ -13,7 +13,6 @@ function TodoList() {
 
   const [itemText, setItemText] = useState('')
   const [itemTitle, setItemTitle] = useState('')
-  const [appInfo, setAppInfo] = useState('');
   const onClick = () => {
     const color = {
       red: Math.floor(Math.random() * 100 + 150),
@@ -86,18 +85,9 @@ function TodoList() {
         <div>
           <button
             onClick={onClick}
-            disabled={!(itemTitle.length > 0 && itemText.length > 0)}
           >Add Task</button>
         </div>
       </div>
-      <button
-            onClick={async()=> {
-              const data = await fetch('/api/info');
-              const json = await data.json();
-              setAppInfo(json);
-            }}
-          >Get App Info</button>
-      <div>{JSON.stringify(appInfo)}</div>
       <div>
         {todosState.todos?.map((item: TodoType, index) =>
           <div

@@ -59,16 +59,8 @@ export const todoReducer = (
 ) => {
   switch (action.type) {
     case Types.Create:
-      return [
-        ...state,
-        {
-          id: action.payload.id,
-          title: action.payload.title,
-          task: action.payload.task,
-          state: action.payload.state,
-          color: action.payload.color
-        }
-      ]
+      // Your implementation
+      return []
     case Types.Update:
       const s = [...state]
       const index = s.findIndex(item => item.id === action.payload.id)
@@ -98,7 +90,8 @@ export const todoReducer = (
         }
       })]
     case Types.Delete:
-      return [...state.filter(todo => todo.id !== action.payload.id)]
+      // Your implementation
+      return []
     case Types.Relist:
       return [...action.payload]
     default:

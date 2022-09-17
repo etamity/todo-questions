@@ -15,7 +15,6 @@ We need to create a todo App, the actions include [add, show, finished, delete]
 - Implement Add Task button function
 - Implement delete button function
 
-
 ## Advance Task
 
 - Add a new api call '/api/info' which contains project package info.
