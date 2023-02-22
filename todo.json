@@ -1,22 +1,22 @@
 {
 "tasks": [{
-  "task": "Go to gym"
+  "task": "Go to gym",
   "status": "progressing"
 },
 {
-  "task": "Buy food"
+  "task": "Buy food",
   "status": "done"
 },
 {
-  "task": "Watch movies"
+  "task": "Watch movies",
   "status": ""
 },
 {
-  "task": "Do homework"
+  "task": "Do homework",
   "status": "done"
 },
 {
-  "task": "Piano excerise"
+  "task": "Piano excerise",
   "status": ""
 }]
 }
